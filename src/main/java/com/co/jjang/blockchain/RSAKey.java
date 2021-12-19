@@ -26,7 +26,7 @@ public class RSAKey {
 			KeyPairGenerator generator = KeyPairGenerator.getInstance(KEY_FACTORY_ALGORITHM);
 			generator.initialize(RSA_KEY_SIZE, new SecureRandom());
 			KeyPair keyPair = generator.generateKeyPair();
-			//hh
+			//hhs
 			// privateKey = Base64.encodeBase64String(keyPair.getPrivate().getEncoded());
 			// publicKey = Base64.en
 		} catch (Exception e) {
