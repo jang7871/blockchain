@@ -3,7 +3,6 @@ package com.co.jjang.blockchain;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.SecureRandom;
-import java.util.Base64;
 
 /*
  * 저자는 암호키를 암호호와 전자서명 두 개 동시에 사용하기 위해 RSA 암호 알고리즘을 사용했다.
@@ -27,8 +26,9 @@ public class RSAKey {
 			KeyPairGenerator generator = KeyPairGenerator.getInstance(KEY_FACTORY_ALGORITHM);
 			generator.initialize(RSA_KEY_SIZE, new SecureRandom());
 			KeyPair keyPair = generator.generateKeyPair();
-			//privateKey = Base64.encodeBase64String(keyPair.getPrivate().getEncoded());
-			//publicKey = Base64.en
+			//hh
+			// privateKey = Base64.encodeBase64String(keyPair.getPrivate().getEncoded());
+			// publicKey = Base64.en
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
