@@ -18,7 +18,7 @@ public class RSAKey {
 
 	// 생성자
 	public RSAKey() {
-
+		generateKeyPair();
 	}
 
 	// 키 쌍을 생성하여, 공개키와 개인키를 문자열 타입으로 변환
