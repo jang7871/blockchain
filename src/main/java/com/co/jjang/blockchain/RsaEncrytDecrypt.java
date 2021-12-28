@@ -1,5 +1,6 @@
 package com.co.jjang.blockchain;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 
 import javax.crypto.Cipher;
@@ -52,5 +53,35 @@ public class RsaEncrytDecrypt {
 		}
 		return result;
 	}
-	// 암호문을 개인키로 복호화
+
+	// 암호문을 개인키로 복호화, 암호문을 평문으로 변환
+	public static String rsaDecrypt(String privateKey, String cipherText) {
+		try {
+			Cipher cipher = Cipher.getInstance(KEY_FACTORY_ALGORITHM);
+			cipher.init(Cipher.DECRYPT_MODE, RSAKey.generatePrivateKey(Base64.decodeBase64(privateKey.getBytes())));
+			byte[] encryptedData = Base64.decodeBase64(cipherText.getBytes());
+			int inputLen = encryptedData.length;
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			int offSet = 0;
+			byte[] cache;
+			int i = 0;
+			// 데이터 복호화
+			while(inputLen - offSet > 0) {
+				if(inputLen - offSet > MAX_DECRYPT_BLOCK) {
+					cache = cipher.doFinal(encryptedData, offSet, MAX_DECRYPT_BLOCK);
+				} else {
+					cache = cipher.doFinal(encryptedData, offSet, inputLen - offSet);
+				}
+				out.write(cache, 0, cache.length);
+				i++;
+				offSet = i * MAX_DECRYPT_BLOCK;
+			}
+			byte[] decryptedData = out.toByteArray();
+			out.close();
+			return new String(decryptedData);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "";
+	}
 }
